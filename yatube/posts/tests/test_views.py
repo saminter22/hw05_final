@@ -97,10 +97,10 @@ class PostPagesTests(TestCase):
         first_object_group = object_index[0].group
         first_object_author = object_index[0].author
         first_object_id = object_index[0].id
-        self.assertEqual(first_object_text, PostPagesTests.post.text)
-        self.assertEqual(first_object_group, PostPagesTests.post.group)
-        self.assertEqual(first_object_author, PostPagesTests.post.author)
-        self.assertEqual(first_object_id, PostPagesTests.post.id)
+        self.assertEqual(first_object_text, PostPagesTests.post2.text)
+        self.assertEqual(first_object_group, PostPagesTests.post2.group)
+        self.assertEqual(first_object_author, PostPagesTests.post2.author)
+        self.assertEqual(first_object_id, PostPagesTests.post2.id)
 
     # Проверка словаря контекста списка постов по группе
     def test_group_list_show_correct_context(self):
