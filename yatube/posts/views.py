@@ -146,14 +146,25 @@ def follow_index(request):
     return render(request, 'posts/follow.html', context)
 
 
+# @login_required
+# def profile_follow(request, username):
+#     # Подписаться на автора
+#     author = get_object_or_404(User, username=username)
+#     if author not in Follow.objects.filter(user=request.user, author=author):
+#         if author != request.user:
+#             Follow.objects.create(author=author, user=request.user)
+#     return redirect('posts:profile', author)
+
+
 @login_required
 def profile_follow(request, username):
-    # Подписаться на автора
     author = get_object_or_404(User, username=username)
-    if author not in Follow.objects.filter(user=request.user, author=author):
-        if author != request.user:
-            Follow.objects.create(author=author, user=request.user)
-    return redirect('posts:profile', author)
+    if request.user == author:
+        return redirect('posts:profile', username=username)
+    if not Follow.objects.filter(user=request.user, author=author):
+        Follow.objects.create(author=author, user=request.user)
+    return redirect('posts:profile', username=username)
+
 
 
 @login_required
