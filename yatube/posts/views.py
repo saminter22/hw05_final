@@ -1,25 +1,17 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
-from .models import Post, Group, Comment, Follow
+from .models import Post, Group, Follow
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_list_or_404
+# from django.shortcuts import get_list_or_404
 from django.views.decorators.cache import cache_page
 
 
 User = get_user_model()
 
-# def index(request):
-#     posts = Post.objects.all()[:10]
-#     template = 'posts/index.html'
-#     context = {'posts': posts,
-#                }
-#     return render(request, template, context)
 
-
-# @cache_page(20)
 @cache_page(20, key_prefix='index_page')
 def index(request):
     post_list = Post.objects.all()
@@ -65,10 +57,10 @@ def profile(request, username):
             }
     else:
         context = {
-                'page_obj': page_obj,
-                'author': author,
-                'following': False,
-            }
+            'page_obj': page_obj,
+            'author': author,
+            'following': False,
+        }
     return render(request, 'posts/profile.html', context)
 
 
@@ -172,30 +164,3 @@ def profile_unfollow(request, username):
         fordel = Follow.objects.get(author=author, user=request.user)
         fordel.delete()
     return redirect('posts:profile', author)
-
-
-# def group_posts(request, slug):
-#     template = 'posts/group_list.html'
-#     group = get_object_or_404(Group, slug=slug)
-#     # posts = Post.objects.filter(group=group)[:10]
-#     posts = group.posts.all()[:10]
-#     context = {
-#         'group': group,
-#         'posts': posts,
-#     }
-#     return render(request, template, context)
-
-
-# def group_posts(request):
-#     template = 'posts/group_list.html'
-#     title = "Страничка списка групп Yatube"
-#     text = "Здесь будет информация о группах проекта Yatube"
-#     context = {'text': text,
-#                'title': title
-#                }
-#     return render(request, template, context)
-
-
-# # В урл мы ждем парметр, и нужно его прередать в функцию для использования
-# def group_posts_detail(request, slug):
-#     return HttpResponse(f'Ггруппа постов с названием: {slug}')
