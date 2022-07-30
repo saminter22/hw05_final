@@ -92,6 +92,7 @@ class PostPagesTests(TestCase):
         """Шаблон index сформирован с правильным контекстом."""
         response = self.authorized_client.get(reverse('posts:index'))
         # Словарь ожидаемых полей первого элемента списка
+        # last_record = self.all_posts.latest('id')
         object_index = response.context['page_obj']
         first_object_text = object_index[0].text
         first_object_group = object_index[0].group
