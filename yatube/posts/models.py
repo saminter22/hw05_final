@@ -86,6 +86,11 @@ class Comment(models.Model):
         related_name='comments'
     )
 
+    class Meta:
+        ordering = ('-created', )
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+
     def __str__(self):
         return self.text[:15]
 
@@ -105,4 +110,10 @@ class Follow(models.Model):
     )
 
     class Meta:
-        unique_together = ('user', 'author',)
+        # unique_together = ('user', 'author',)
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'author'],
+                name='user_author'
+            )
+        ]

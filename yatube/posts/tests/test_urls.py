@@ -99,10 +99,41 @@ class PostURLTests(TestCase):
                 response = self.authorized_client.get(address)
                 self.assertTemplateUsed(response, template)
 
-    def test_comment_only_for_authorized_user_redirect_to_authorization(self):
-        """Создание комментария доступно только для авторизованного."""
+    def test_comment_denied_to_guest(self):
+        """Создание комментария не доступно гостю."""
         response = self.guest_client.get(
             f'/posts/{PostURLTests.post.pk}/comment/', follow=True)
         self.assertRedirects(
             response,
             f'/auth/login/?next=/posts/{PostURLTests.post.pk}/comment/')
+
+    def test_subscribe_for_authorized_user_redirect_to_authorization(self):
+        """Подписка доступна только для авторизованного пользователя."""
+        response = self.guest_client.get(
+            f'/profile/{PostURLTests.user}/follow/', follow=True)
+        self.assertRedirects(
+            response,
+            f'/auth/login/?next=/profile/{PostURLTests.user}/follow/')
+
+    def test_comments_create_url_exists_at_desired_location_for_auth(self):
+        """Создание комментария доступно только авторизованному."""
+        response = self.authorized_client.get(
+            f'/posts/{PostURLTests.post.pk}/comment/')
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+
+    def test_subscribe_authors_url_exists_at_desired_location_for_auth(self):
+        """Смотреть посты избранных автором можно только авторизованному."""
+        response = self.authorized_client.get('/follow/')
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_subscribe_url_exists_at_desired_location_for_authorization(self):
+        """Подписка доступна только авторизованному пользователю."""
+        response = self.authorized_client.get(
+            f'/profile/{PostURLTests.user}/follow/')
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+
+    def test_unsubscribe_url_exists_at_desired_location_for_authorization(self):
+        """Отписка доступна только авторизованному пользователю."""
+        response = self.authorized_client.get(
+            f'/profile/{PostURLTests.user}/unfollow/')
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)

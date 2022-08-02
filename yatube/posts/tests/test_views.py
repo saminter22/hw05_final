@@ -196,14 +196,7 @@ class PaginatorViewsTest(TestCase):
             slug='group-slug1',
             description='Тестовое описание1',
         )
-        # for i in range(13):
-        #     Post.objects.create(
-        #         author=cls.user,
-        #         # author='leo',
-        #         text=f'Тестовый пост {i}',
-        #         id=i,
-        #         group=cls.group,
-        #     )
+
         Post.objects.bulk_create(
             [Post(
                 id=i,

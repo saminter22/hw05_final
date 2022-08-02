@@ -147,3 +147,21 @@ class PostFormTests(TestCase):
                 text='Тестовый текст2',
             ).exists()
         )
+
+    def test_comment_form(self):
+        """Валидная форма добавляет запись в Comment."""
+        post_id = PostFormTests.post.id
+        # comment1 = PostFormTests.comment1
+        form_data = {
+            'text': 'Тестовый комментарий',
+        }
+        self.authorized_client.post(
+            reverse('posts:add_comment', kwargs={'post_id': post_id}),
+            data=form_data,
+            follow=True
+        )
+        self.assertTrue(
+            Comment.objects.filter(
+                text='Тестовый комментарий',
+            ).exists()
+        )

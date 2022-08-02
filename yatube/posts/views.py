@@ -67,7 +67,7 @@ def profile(request, username):
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     # comments = Comment.objects.filter(post=post)
-    comments = post.comments.all()
+    comments = post.comments.select_related('author').all()
     # comments = get_object_or_404(Comment, post=post)
     # comments = get_list_or_404(Comment, post=post)
     form = CommentForm()
