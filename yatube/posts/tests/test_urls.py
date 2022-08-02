@@ -132,7 +132,7 @@ class PostURLTests(TestCase):
             f'/profile/{PostURLTests.user}/follow/')
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
-    def test_unsubscribe_url_exists_at_desired_location_for_authorization(self):
+    def test_unsubscribe_url_exists_at_desired_location_for_auth(self):
         """Отписка доступна только авторизованному пользователю."""
         response = self.authorized_client.get(
             f'/profile/{PostURLTests.user}/unfollow/')
