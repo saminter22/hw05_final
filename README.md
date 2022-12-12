@@ -26,35 +26,26 @@ _Django 2.2.19_
 
 Cоздать и активировать виртуальное окружение:
 
-``` 
-python -m venv venv 
-```
-``` 
-source venv/Scripts/activate 
-```
+``` python -m venv venv ```
+
+``` source venv/Scripts/activate ```
 
 Обновить пакетный менеджер pip и установить зависимости из файла requirements.txt:
-``` 
-python -m pip install --upgrade pip 
-```
-``` 
-pip install -r requirements.txt 
-```
+
+``` python -m pip install --upgrade pip ```
+``` pip install -r requirements.txt ```
 
 Перейти в папку проекта
-``` 
-cd yatube 
-```
+
+``` cd yatube ```
 
 Выполнить миграции:
-``` 
-python manage.py migrate 
-```
+
+``` python manage.py migrate ```
 
 Запустить проект:
-``` 
-python manage.py runserver 
-```
+
+``` python manage.py runserver ```
 
 ## License
 
