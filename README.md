@@ -1,5 +1,5 @@
 # Yatube
-### Описание.
+### Описание
 Проект создан и обладает характеристиками социальной сети.
 ### Используемые технологии
 _Python 3.7_
@@ -17,37 +17,18 @@ _Django 2.2.19_
 
 ## Установка и развертывание на локальной машине
 Установка происходит с помощью клонирования с репозитория:
-```
-git clone https://github.com/saminter22/hw05_final
-```
+```git clone https://github.com/saminter22/hw05_final```
 Перейти в папку проекта:
-```
-cd hw05_final
-```
+```cd hw05_final```
 Cоздать и активировать виртуальное окружение:
-
-```
-python -m venv venv
-```
-```
-source venv/Scripts/activate
-```
+``` python -m venv venv ```
+``` source venv/Scripts/activate ```
 Обновить пакетный менеджер pip и установить зависимости из файла requirements.txt:
-```
-python -m pip install --upgrade pip
-```
-```
-pip install -r requirements.txt
-```
+``` python -m pip install --upgrade pip ```
+``` pip install -r requirements.txt ```
 Перейти в папку проекта
-```
-cd yatube
-```
+``` cd yatube ```
 Выполнить миграции:
-```
-python manage.py migrate
-```
+``` python manage.py migrate ```
 Запустить проект:
-```
-python manage.py runserver
-```
+``` python manage.py runserver ```
